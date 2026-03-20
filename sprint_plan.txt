@@ -1,0 +1,183 @@
+================================================================================
+                    TRAFFIC EVENT IR PROJECT - SPRINT PLAN
+================================================================================
+
+Team Members:
+- Ayomide
+- Martin
+
+Project: Traffic Event Retrieval for Route Optimization and Traffic Intelligence
+Course: Information Retrieval
+
+================================================================================
+                            PROJECT PHASES OVERVIEW
+================================================================================
+
+Phase 1 — Project Setup ✅ COMPLETE
+Phase 2 — Dataset/Corpus Creation ✅ COMPLETE  
+Phase 3 — First Retrieval Baseline ✅ COMPLETE
+Phase 4 — Evaluation
+Phase 5 — Improvements
+Phase 6 — Report/Demo
+
+================================================================================
+                            DETAILED SPRINT BREAKDOWN
+================================================================================
+
+WEEK 1 (SPRINT 1) - ✅ COMPLETE
+Goal: Get first working TF-IDF baseline
+Status: DONE - System can search traffic events and return ranked results
+
+Tasks Completed:
+- ✅ Set up project folder structure
+- ✅ Load and transform raw traffic data into IR documents
+- ✅ Create text preprocessing pipeline
+- ✅ Implement TF-IDF retrieval with cosine similarity
+- ✅ Test system with sample queries
+
+================================================================================
+WEEK 2 (SPRINT 2) - CURRENT WEEK
+Goal: Improve preprocessing and add BM25 retrieval model
+
+TASKS TO DIVIDE:
+
+[TEAM MEMBER 1 TASKS]
+- [ ] Improve text preprocessing (add stop words, stemming/lemmatization)
+- [ ] Create BM25 retrieval implementation
+- [ ] Set up comparison framework for TF-IDF vs BM25
+- [ ] Document preprocessing improvements in README
+
+[TEAM MEMBER 2 TASKS]  
+- [ ] Create evaluation metrics implementation (Precision@K, Recall@K, MAP, nDCG)
+- [ ] Design test queries for evaluation
+- [ ] Create relevance judgments (qrels) for sample queries
+- [ ] Set up evaluation pipeline
+
+[BOTH TEAM MEMBERS]
+- [ ] Meet to integrate BM25 and evaluation components
+- [ ] Test both retrieval models on same queries
+- [ ] Compare TF-IDF vs BM25 performance
+- [ ] Document findings
+
+Due: End of Week 2
+
+================================================================================
+WEEK 3 (SPRINT 3)
+Goal: Complete evaluation and analyze results
+
+TASKS TO DIVIDE:
+
+[TEAM MEMBER 1 TASKS]
+- [ ] Run comprehensive evaluation on both models
+- [ ] Create performance comparison charts/tables
+- [ ] Analyze failure cases and improvement opportunities
+- [ ] Write evaluation section of report
+
+[TEAM MEMBER 2 TASKS]
+- [ ] Create larger, more diverse query set
+- [ ] Implement additional evaluation metrics if needed
+- [ ] Set up automated evaluation pipeline
+- [ ] Create results visualization
+
+[BOTH TEAM MEMBERS]
+- [ ] Discuss evaluation results
+- [ ] Plan improvements based on findings
+- [ ] Update project documentation
+- [ ] Prepare Sprint 4 plan
+
+Due: End of Week 3
+
+================================================================================
+WEEK 4 (SPRINT 4)
+Goal: Implement improvements and advanced features
+
+TASKS TO DIVIDE:
+
+[TEAM MEMBER 1 TASKS]
+- [ ] Implement semantic retrieval (optional: sentence transformers)
+- [ ] Add query expansion techniques
+- [ ] Improve document ranking with additional features
+- [ ] Optimize system performance
+
+[TEAM MEMBER 2 TASKS]
+- [ ] Create simple demo UI/interface
+- [ ] Add filtering capabilities (by time, location, event type)
+- [ ] Implement result clustering or categorization
+- [ ] Test system with real-world scenarios
+
+[BOTH TEAM MEMBERS]
+- [ ] Test all improvements together
+- [ ] Finalize system architecture
+- [ ] Prepare for final presentation
+- [ ] Document all improvements
+
+Due: End of Week 4
+
+================================================================================
+WEEK 5 (SPRINT 5)
+Goal: Final report, demo preparation, and project completion
+
+TASKS TO DIVIDE:
+
+[TEAM MEMBER 1 TASKS]
+- [ ] Write final report sections (methodology, results, conclusion)
+- [ ] Create presentation slides
+- [ ] Prepare code documentation
+- [ ] Final code review and cleanup
+
+[TEAM MEMBER 2 TASKS]
+- [ ] Finalize demo presentation
+- [ ] Create project video walkthrough (if needed)
+- [ ] Prepare GitHub repository with clean structure
+- [ ] Test final system thoroughly
+
+[BOTH TEAM MEMBERS]
+- [ ] Practice final presentation
+- [ ] Submit all deliverables
+- [ ] Project retrospective and lessons learned
+- [ ] Celebrate completion! 🎉
+
+Due: End of Week 5
+
+================================================================================
+                              COORDINATION NOTES
+================================================================================
+
+Meeting Schedule:
+- Weekly sync: [Day, Time]
+- Mid-week check-in: [Day, Time]
+- Sprint planning/review: [Day, Time]
+
+Communication:
+- Primary channel: [Discord/WhatsApp/Slack]
+- File sharing: [Google Drive/GitHub]
+- Code review: [GitHub pull requests]
+
+File Organization:
+- Each person works in separate branch
+- Main integration happens in main branch
+- All code reviewed before merging
+
+================================================================================
+                             CURRENT STATUS (WEEK 2)
+================================================================================
+
+What's Working:
+✅ TF-IDF retrieval system functional
+✅ Can search traffic events with queries
+✅ Returns ranked results with scores
+✅ Project structure complete
+
+Next Immediate Tasks:
+1. Fill in team member names above
+2. Assign Week 2 tasks between team members
+3. Set up coordination meeting schedule
+4. Start working on assigned tasks
+
+Files Created So Far:
+- src/data/load_data.py (data loading and document creation)
+- src/preprocessing/clean_text.py (text preprocessing)
+- src/retrieval/tfidf_retrieval.py (TF-IDF search system)
+- data/processed/traffic_documents.csv (processed IR documents)
+
+Ready to divide Week 2 tasks!

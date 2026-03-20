@@ -3,3 +3,4 @@ scikit-learn
 numpy
 jupyter
 rank-bm25
+nltk
