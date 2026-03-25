@@ -8,6 +8,7 @@ import os
 # Add parent directory to path to import preprocessing
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from preprocessing.clean_text import tokenize
+from preprocessing.query_processor import QueryProcessor
 
 class BM25Retriever:
     """
@@ -27,6 +28,7 @@ class BM25Retriever:
         self.bm25_model = None
         self.documents_df = None
         self.fitted = False
+        self.query_processor = QueryProcessor()  # Add query processor
     
     def fit(self, documents_df: pd.DataFrame, token_column: str = 'tokens'):
         """
@@ -67,8 +69,9 @@ class BM25Retriever:
         if not self.fitted:
             raise ValueError("Model must be fitted before searching. Call fit() first.")
         
-        # Tokenize query
-        query_tokens = tokenize(query)
+        # Preprocess query using the same pipeline as documents
+        query_result = self.query_processor.preprocess_query(query)
+        query_tokens = query_result['tokens']
         
         if not query_tokens:
             return []

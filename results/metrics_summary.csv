@@ -1,0 +1,151 @@
+query_id,query_text,retriever,k,precision_at_k,recall_at_k,ndcg_at_k
+q1,heavy rain traffic congestion,TF-IDF,5,0.4,0.25,0.5087403079104241
+q1,heavy rain traffic congestion,TF-IDF,10,0.3,0.375,0.565320323125409
+q1,heavy rain traffic congestion,TF-IDF,AP,0.2708333333333333,0.2708333333333333,0.2708333333333333
+q2,road congestion during rush hour,TF-IDF,5,1.0,0.7142857142857143,0.7698724385020871
+q2,road congestion during rush hour,TF-IDF,10,0.7,1.0,0.9311494771960884
+q2,road congestion during rush hour,TF-IDF,AP,1.0,1.0,1.0
+q3,accidents near downtown,TF-IDF,5,0.0,0.0,0.0
+q3,accidents near downtown,TF-IDF,10,0.0,0.0,0.0
+q3,accidents near downtown,TF-IDF,AP,0.0,0.0,0.0
+q4,traffic events affecting airport routes,TF-IDF,5,0.0,0.0,0.0
+q4,traffic events affecting airport routes,TF-IDF,10,0.0,0.0,0.0
+q4,traffic events affecting airport routes,TF-IDF,AP,0.0,0.0,0.0
+q5,weekend traffic flow,TF-IDF,5,1.0,1.0,1.0
+q5,weekend traffic flow,TF-IDF,10,0.5,1.0,1.0
+q5,weekend traffic flow,TF-IDF,AP,1.0,1.0,1.0
+q6,secondary road accidents,TF-IDF,5,0.0,0.0,0.0
+q6,secondary road accidents,TF-IDF,10,0.0,0.0,0.0
+q6,secondary road accidents,TF-IDF,AP,0.0,0.0,0.0
+q7,weather conditions causing traffic delays,TF-IDF,5,0.0,0.0,0.0
+q7,weather conditions causing traffic delays,TF-IDF,10,0.0,0.0,0.0
+q7,weather conditions causing traffic delays,TF-IDF,AP,0.0,0.0,0.0
+q8,morning commute traffic issues,TF-IDF,5,0.0,0.0,0.0
+q8,morning commute traffic issues,TF-IDF,10,0.0,0.0,0.0
+q8,morning commute traffic issues,TF-IDF,AP,0.0,0.0,0.0
+q9,highway traffic jams,TF-IDF,5,0.0,0.0,0.0
+q9,highway traffic jams,TF-IDF,10,0.0,0.0,0.0
+q9,highway traffic jams,TF-IDF,AP,0.0,0.0,0.0
+q10,clear weather traffic conditions,TF-IDF,5,0.0,0.0,0.0
+q10,clear weather traffic conditions,TF-IDF,10,0.0,0.0,0.0
+q10,clear weather traffic conditions,TF-IDF,AP,0.0,0.0,0.0
+q11,evening rush hour congestion,TF-IDF,5,0.0,0.0,0.0
+q11,evening rush hour congestion,TF-IDF,10,0.0,0.0,0.0
+q11,evening rush hour congestion,TF-IDF,AP,0.0,0.0,0.0
+q12,residential road traffic,TF-IDF,5,0.0,0.0,0.0
+q12,residential road traffic,TF-IDF,10,0.0,0.0,0.0
+q12,residential road traffic,TF-IDF,AP,0.0,0.0,0.0
+q13,heavy precipitation impact on roads,TF-IDF,5,0.0,0.0,0.0
+q13,heavy precipitation impact on roads,TF-IDF,10,0.0,0.0,0.0
+q13,heavy precipitation impact on roads,TF-IDF,AP,0.0,0.0,0.0
+q14,traffic incidents during bad weather,TF-IDF,5,0.0,0.0,0.0
+q14,traffic incidents during bad weather,TF-IDF,10,0.0,0.0,0.0
+q14,traffic incidents during bad weather,TF-IDF,AP,0.0,0.0,0.0
+q15,urban area congestion,TF-IDF,5,0.0,0.0,0.0
+q15,urban area congestion,TF-IDF,10,0.0,0.0,0.0
+q15,urban area congestion,TF-IDF,AP,0.0,0.0,0.0
+q16,airport access traffic problems,TF-IDF,5,0.0,0.0,0.0
+q16,airport access traffic problems,TF-IDF,10,0.0,0.0,0.0
+q16,airport access traffic problems,TF-IDF,AP,0.0,0.0,0.0
+q17,light traffic conditions,TF-IDF,5,0.0,0.0,0.0
+q17,light traffic conditions,TF-IDF,10,0.0,0.0,0.0
+q17,light traffic conditions,TF-IDF,AP,0.0,0.0,0.0
+q18,severe weather traffic disruptions,TF-IDF,5,0.0,0.0,0.0
+q18,severe weather traffic disruptions,TF-IDF,10,0.0,0.0,0.0
+q18,severe weather traffic disruptions,TF-IDF,AP,0.0,0.0,0.0
+q19,peak hour traffic flow,TF-IDF,5,0.0,0.0,0.0
+q19,peak hour traffic flow,TF-IDF,10,0.0,0.0,0.0
+q19,peak hour traffic flow,TF-IDF,AP,0.0,0.0,0.0
+q20,main road traffic incidents,TF-IDF,5,0.0,0.0,0.0
+q20,main road traffic incidents,TF-IDF,10,0.0,0.0,0.0
+q20,main road traffic incidents,TF-IDF,AP,0.0,0.0,0.0
+q21,moderate traffic congestion,TF-IDF,5,0.0,0.0,0.0
+q21,moderate traffic congestion,TF-IDF,10,0.0,0.0,0.0
+q21,moderate traffic congestion,TF-IDF,AP,0.0,0.0,0.0
+q22,rain storm traffic impact,TF-IDF,5,0.0,0.0,0.0
+q22,rain storm traffic impact,TF-IDF,10,0.0,0.0,0.0
+q22,rain storm traffic impact,TF-IDF,AP,0.0,0.0,0.0
+q23,city center traffic problems,TF-IDF,5,0.0,0.0,0.0
+q23,city center traffic problems,TF-IDF,10,0.0,0.0,0.0
+q23,city center traffic problems,TF-IDF,AP,0.0,0.0,0.0
+q24,highway closure effects,TF-IDF,5,0.0,0.0,0.0
+q24,highway closure effects,TF-IDF,10,0.0,0.0,0.0
+q24,highway closure effects,TF-IDF,AP,0.0,0.0,0.0
+q25,early morning traffic,TF-IDF,5,0.0,0.0,0.0
+q25,early morning traffic,TF-IDF,10,0.0,0.0,0.0
+q25,early morning traffic,TF-IDF,AP,0.0,0.0,0.0
+q1,heavy rain traffic congestion,BM25,5,0.2,0.125,0.21398626473452753
+q1,heavy rain traffic congestion,BM25,10,0.3,0.375,0.38974971704171324
+q1,heavy rain traffic congestion,BM25,AP,0.1450892857142857,0.1450892857142857,0.1450892857142857
+q2,road congestion during rush hour,BM25,5,0.0,0.0,0.0
+q2,road congestion during rush hour,BM25,10,0.0,0.0,0.0
+q2,road congestion during rush hour,BM25,AP,0.0,0.0,0.0
+q3,accidents near downtown,BM25,5,0.0,0.0,0.0
+q3,accidents near downtown,BM25,10,0.0,0.0,0.0
+q3,accidents near downtown,BM25,AP,0.0,0.0,0.0
+q4,traffic events affecting airport routes,BM25,5,0.0,0.0,0.0
+q4,traffic events affecting airport routes,BM25,10,0.0,0.0,0.0
+q4,traffic events affecting airport routes,BM25,AP,0.0,0.0,0.0
+q5,weekend traffic flow,BM25,5,0.2,0.2,0.14606834984270645
+q5,weekend traffic flow,BM25,10,0.2,0.4,0.2591217516005785
+q5,weekend traffic flow,BM25,AP,0.10714285714285714,0.10714285714285714,0.10714285714285714
+q6,secondary road accidents,BM25,5,0.0,0.0,0.0
+q6,secondary road accidents,BM25,10,0.0,0.0,0.0
+q6,secondary road accidents,BM25,AP,0.0,0.0,0.0
+q7,weather conditions causing traffic delays,BM25,5,0.0,0.0,0.0
+q7,weather conditions causing traffic delays,BM25,10,0.0,0.0,0.0
+q7,weather conditions causing traffic delays,BM25,AP,0.0,0.0,0.0
+q8,morning commute traffic issues,BM25,5,0.0,0.0,0.0
+q8,morning commute traffic issues,BM25,10,0.0,0.0,0.0
+q8,morning commute traffic issues,BM25,AP,0.0,0.0,0.0
+q9,highway traffic jams,BM25,5,0.0,0.0,0.0
+q9,highway traffic jams,BM25,10,0.0,0.0,0.0
+q9,highway traffic jams,BM25,AP,0.0,0.0,0.0
+q10,clear weather traffic conditions,BM25,5,0.0,0.0,0.0
+q10,clear weather traffic conditions,BM25,10,0.0,0.0,0.0
+q10,clear weather traffic conditions,BM25,AP,0.0,0.0,0.0
+q11,evening rush hour congestion,BM25,5,0.0,0.0,0.0
+q11,evening rush hour congestion,BM25,10,0.0,0.0,0.0
+q11,evening rush hour congestion,BM25,AP,0.0,0.0,0.0
+q12,residential road traffic,BM25,5,0.0,0.0,0.0
+q12,residential road traffic,BM25,10,0.0,0.0,0.0
+q12,residential road traffic,BM25,AP,0.0,0.0,0.0
+q13,heavy precipitation impact on roads,BM25,5,0.0,0.0,0.0
+q13,heavy precipitation impact on roads,BM25,10,0.0,0.0,0.0
+q13,heavy precipitation impact on roads,BM25,AP,0.0,0.0,0.0
+q14,traffic incidents during bad weather,BM25,5,0.0,0.0,0.0
+q14,traffic incidents during bad weather,BM25,10,0.0,0.0,0.0
+q14,traffic incidents during bad weather,BM25,AP,0.0,0.0,0.0
+q15,urban area congestion,BM25,5,0.0,0.0,0.0
+q15,urban area congestion,BM25,10,0.0,0.0,0.0
+q15,urban area congestion,BM25,AP,0.0,0.0,0.0
+q16,airport access traffic problems,BM25,5,0.0,0.0,0.0
+q16,airport access traffic problems,BM25,10,0.0,0.0,0.0
+q16,airport access traffic problems,BM25,AP,0.0,0.0,0.0
+q17,light traffic conditions,BM25,5,0.0,0.0,0.0
+q17,light traffic conditions,BM25,10,0.0,0.0,0.0
+q17,light traffic conditions,BM25,AP,0.0,0.0,0.0
+q18,severe weather traffic disruptions,BM25,5,0.0,0.0,0.0
+q18,severe weather traffic disruptions,BM25,10,0.0,0.0,0.0
+q18,severe weather traffic disruptions,BM25,AP,0.0,0.0,0.0
+q19,peak hour traffic flow,BM25,5,0.0,0.0,0.0
+q19,peak hour traffic flow,BM25,10,0.0,0.0,0.0
+q19,peak hour traffic flow,BM25,AP,0.0,0.0,0.0
+q20,main road traffic incidents,BM25,5,0.0,0.0,0.0
+q20,main road traffic incidents,BM25,10,0.0,0.0,0.0
+q20,main road traffic incidents,BM25,AP,0.0,0.0,0.0
+q21,moderate traffic congestion,BM25,5,0.0,0.0,0.0
+q21,moderate traffic congestion,BM25,10,0.0,0.0,0.0
+q21,moderate traffic congestion,BM25,AP,0.0,0.0,0.0
+q22,rain storm traffic impact,BM25,5,0.0,0.0,0.0
+q22,rain storm traffic impact,BM25,10,0.0,0.0,0.0
+q22,rain storm traffic impact,BM25,AP,0.0,0.0,0.0
+q23,city center traffic problems,BM25,5,0.0,0.0,0.0
+q23,city center traffic problems,BM25,10,0.0,0.0,0.0
+q23,city center traffic problems,BM25,AP,0.0,0.0,0.0
+q24,highway closure effects,BM25,5,0.0,0.0,0.0
+q24,highway closure effects,BM25,10,0.0,0.0,0.0
+q24,highway closure effects,BM25,AP,0.0,0.0,0.0
+q25,early morning traffic,BM25,5,0.0,0.0,0.0
+q25,early morning traffic,BM25,10,0.0,0.0,0.0
+q25,early morning traffic,BM25,AP,0.0,0.0,0.0

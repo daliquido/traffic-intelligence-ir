@@ -1,0 +1,26 @@
+query_id,query_text,category
+q1,heavy rain traffic congestion,weather-related traffic
+q2,road congestion during rush hour,rush-hour
+q3,accidents near downtown,congestion
+q4,traffic events affecting airport routes,road-specific
+q5,weekend traffic flow,congestion
+q6,secondary road accidents,road-specific
+q7,weather conditions causing traffic delays,weather-related traffic
+q8,morning commute traffic issues,rush-hour
+q9,highway traffic jams,congestion
+q10,clear weather traffic conditions,weather-related traffic
+q11,evening rush hour congestion,rush-hour
+q12,residential road traffic,road-specific
+q13,heavy precipitation impact on roads,weather-related traffic
+q14,traffic incidents during bad weather,weather-related traffic
+q15,urban area congestion,congestion
+q16,airport access traffic problems,road-specific
+q17,light traffic conditions,congestion
+q18,severe weather traffic disruptions,weather-related traffic
+q19,peak hour traffic flow,rush-hour
+q20,main road traffic incidents,road-specific
+q21,moderate traffic congestion,congestion
+q22,rain storm traffic impact,weather-related traffic
+q23,city center traffic problems,congestion
+q24,highway closure effects,road-specific
+q25,early morning traffic,rush-hour

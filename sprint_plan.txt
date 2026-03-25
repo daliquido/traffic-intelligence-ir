@@ -1,5 +1,5 @@
 ================================================================================
-                    TRAFFIC EVENT IR PROJECT - SPRINT PLAN
+                    TRAFFIC EVENT IR PROJECT - COMPREHENSIVE PLAN
 ================================================================================
 
 Team Members:
@@ -10,174 +10,296 @@ Project: Traffic Event Retrieval for Route Optimization and Traffic Intelligence
 Course: Information Retrieval
 
 ================================================================================
-                            PROJECT PHASES OVERVIEW
+                            PROJECT OVERVIEW
 ================================================================================
 
-Phase 1 — Project Setup ✅ COMPLETE
-Phase 2 — Dataset/Corpus Creation ✅ COMPLETE  
-Phase 3 — First Retrieval Baseline ✅ COMPLETE
-Phase 4 — Evaluation
-Phase 5 — Improvements
-Phase 6 — Report/Demo
+Goal: Build an Information Retrieval system that retrieves and ranks traffic-related 
+events relevant to user queries, location, time, or route context.
+
+Dataset: Kigali traffic and weather simulation data (544,320 events)
+System: TF-IDF + BM25 retrieval with evaluation metrics
 
 ================================================================================
-                            DETAILED SPRINT BREAKDOWN
+                            PROJECT PHASES
 ================================================================================
 
-WEEK 1 (SPRINT 1) - ✅ COMPLETE
-Goal: Get first working TF-IDF baseline
-Status: DONE - System can search traffic events and return ranked results
+Phase 1 — Foundation and Data ✅ COMPLETE
+Phase 2 — Document Processing ✅ COMPLETE  
+Phase 3 — Retrieval Systems ✅ COMPLETE
+Phase 4 — Evaluation 🔄 CURRENT
+Phase 5 — Improvements 📋 PLANNED
+Phase 6 — Final Demo 📋 PLANNED
+
+================================================================================
+                            COMPLETED WORK
+================================================================================
+
+✅ SPRINT 0 - PROJECT FOUNDATION
+Goal: Set up the project correctly before coding.
 
 Tasks Completed:
-- ✅ Set up project folder structure
-- ✅ Load and transform raw traffic data into IR documents
-- ✅ Create text preprocessing pipeline
-- ✅ Implement TF-IDF retrieval with cosine similarity
-- ✅ Test system with sample queries
+• ✅ Created separate IR project folder (clean from ML code)
+• ✅ Set up professional folder structure:
+  - data/raw, data/processed, data/interim, data/queries
+  - src/data, src/preprocessing, src/retrieval, src/evaluation
+  - notebooks/, results/
+• ✅ Created core files: README.md, requirements.txt, .gitignore
+• ✅ Copied raw dataset from ML project (essential files only)
+• ✅ Cleaned up project structure (removed 200MB unused files)
+
+Deliverable: Clean IR project folder with raw data - ✅ COMPLETE
+
+✅ SPRINT 1 - DATA UNDERSTANDING
+Goal: Understand exactly what data you have and what can become IR documents.
+
+Tasks Completed:
+• ✅ Inspected all raw CSV files and columns
+• ✅ Selected primary file: kigali_weather_traffic_ultimate_clean.csv (544,320 rows)
+• ✅ Identified 9 key IR columns from 34 total columns
+• ✅ Ignored ML-engineered features (day_sin, hour_cos, etc.)
+• ✅ Documented data transformation strategy
+
+Selected Columns:
+- Traffic: vehicle_counts, highway_type, is_rush_hour, is_weekend
+- Weather: temperature, precipitation, is_rain, is_heavy_rain, visibility  
+- Location: source_node, target_node, highway_type
+- Time: timestamp, hour_of_day, day_of_week
+
+Deliverable: Data analysis document - ✅ COMPLETE (sprint1_data_analysis.md)
+
+✅ SPRINT 2 - DOCUMENT FORMAT DESIGN
+Goal: Decide what one searchable document looks like.
+
+Tasks Completed:
+• ✅ Defined 7-field document schema (doc_id, title, timestamp, event_type, location, vehicle_count, text)
+• ✅ Created congestion rules (heavy/moderate/light/free flow based on vehicle_count)
+• ✅ Created weather rules (Rain/Heavy Rain/Clear/Clouds from weather_code)
+• ✅ Designed text generation template
+• ✅ Confirmed one row = one document strategy
+
+Sample Document:
+{
+  "doc_id": "traffic_0",
+  "title": "Free Flow - Rain", 
+  "timestamp": "2026-02-10 00:00:00",
+  "event_type": "Rain",
+  "location": "secondary road",
+  "vehicle_count": 38,
+  "text": "Traffic event: free flow on secondary road during rain weather conditions with 0.09mm precipitation"
+}
+
+Deliverable: Document schema and examples - ✅ COMPLETE (sprint2_document_schema.md)
+
+✅ SPRINT 3 - CORPUS GENERATION  
+Goal: Convert raw structured data into IR documents.
+
+Tasks Completed:
+• ✅ Created comprehensive notebook: notebooks/01_build_corpus.ipynb
+• ✅ Built row-to-document transformation functions
+• ✅ Generated unique doc_id for each document
+• ✅ Processed all 544,320 rows into searchable documents
+• ✅ Saved corpus to data/processed/traffic_documents.csv
+
+Corpus Specifications:
+- Documents: 544,320 traffic events
+- Required fields: ✅ doc_id, ✅ text, ✅ timestamp  
+- Additional fields: title, event_type, location, vehicle_count
+- Format: CSV ready for IR processing
+
+Deliverable: traffic_documents.csv with corpus generation notebook - ✅ COMPLETE
+
+✅ SPRINT 4 - TEXT PREPROCESSING
+Goal: Improve text quality for better retrieval.
+
+Tasks Completed:
+• ✅ Enhanced text cleaning (handle precipitation, speed units)
+• ✅ Implemented custom stop word removal (110 words: English + traffic-specific)
+• ✅ Added simple stemming (suffix removal for normalization)
+• ✅ Reduced vocabulary from 364 → 320 terms (12% improvement)
+• ✅ Created tokenization pipeline with analysis tools
+
+Improvements Achieved:
+- Better search relevance (weather terms preserved, noise removed)
+- Cleaner vocabulary (removed "event", "during", "conditions")
+- Professional preprocessing pipeline
+
+Deliverable: Enhanced preprocessing system - ✅ COMPLETE
+
+✅ SPRINT 5 - RETRIEVAL SYSTEMS
+Goal: Build working TF-IDF and BM25 retrieval models.
+
+Tasks Completed:
+• ✅ Implemented TF-IDF retrieval with cosine similarity
+• ✅ Implemented BM25 retrieval with proper parameters (k1=1.2, b=0.75)
+• ✅ Created comparison framework for both models
+• ✅ Tested with sample queries and analyzed results
+• ✅ Documented performance differences
+
+Performance Results:
+- TF-IDF: Scores 0.3-0.5, broader retrieval
+- BM25: Scores 1.8-4.0, more selective retrieval  
+- Overlap: 20-60% between models (good diversity)
+- Both models working perfectly with 10K document test set
+
+Deliverable: Two working retrieval systems with comparison - ✅ COMPLETE
 
 ================================================================================
-WEEK 2 (SPRINT 2) - CURRENT WEEK
-Goal: Improve preprocessing and add BM25 retrieval model
+                            CURRENT WORK - SPRINT 6
+================================================================================
 
-TASKS TO DIVIDE:
+🔄 SPRINT 6 - EVALUATION AND METRICS
+Goal: Implement IR evaluation metrics and test system performance.
 
-[TEAM MEMBER 1 TASKS]
-- [ ] Improve text preprocessing (add stop words, stemming/lemmatization)
-- [ ] Create BM25 retrieval implementation
-- [ ] Set up comparison framework for TF-IDF vs BM25
-- [ ] Document preprocessing improvements in README
+Tasks to Complete:
 
-[TEAM MEMBER 2 TASKS]  
-- [ ] Create evaluation metrics implementation (Precision@K, Recall@K, MAP, nDCG)
-- [ ] Design test queries for evaluation
-- [ ] Create relevance judgments (qrels) for sample queries
-- [ ] Set up evaluation pipeline
+AYOMIDE'S TASKS:
+• [ ] Create comprehensive test query set (20-30 diverse traffic queries)
+• [ ] Design relevance judgment guidelines (what makes a document relevant)
+• [ ] Help Martin test evaluation metrics on both TF-IDF and BM25
+• [ ] Document evaluation methodology and results
 
-[BOTH TEAM MEMBERS]
-- [ ] Meet to integrate BM25 and evaluation components
-- [ ] Test both retrieval models on same queries
-- [ ] Compare TF-IDF vs BM25 performance
-- [ ] Document findings
+MARTIN'S TASKS:
+• [ ] Implement evaluation metrics (Precision@K, Recall@K, MAP, nDCG)
+• [ ] Create qrels format for relevance judgments
+• [ ] Build evaluation pipeline with both retrieval models
+• [ ] Generate performance comparison charts and tables
 
-Due: End of Week 2
+BOTH TEAM MEMBERS:
+• [ ] Meet to review evaluation results
+• [ ] Discuss which model performs better for different query types
+• [ ] Plan improvements based on evaluation findings
+• [ ] Document evaluation conclusions
+
+Expected Evaluation Queries:
+- "rain traffic congestion"
+- "heavy rain road conditions" 
+- "rush hour traffic"
+- "weekend traffic flow"
+- "secondary road accident"
+- "weather affecting airport road"
+- "road construction on highway"
+- "traffic events during morning commute"
+- "congestion near downtown"
+- "clear weather traffic conditions"
+
+Success Criteria:
+- Both models evaluated with standard IR metrics
+- Clear performance comparison documented
+- Recommendations for improvements identified
+
+Due: End of current week
 
 ================================================================================
-WEEK 3 (SPRINT 3)
-Goal: Complete evaluation and analyze results
+                            FUTURE WORK - SPRINTS 7-8
+================================================================================
 
-TASKS TO DIVIDE:
+📋 SPRINT 7 - SYSTEM IMPROVEMENTS
+Goal: Implement advanced features based on evaluation results.
 
-[TEAM MEMBER 1 TASKS]
-- [ ] Run comprehensive evaluation on both models
-- [ ] Create performance comparison charts/tables
-- [ ] Analyze failure cases and improvement opportunities
-- [ ] Write evaluation section of report
+Potential Tasks:
+- Query expansion techniques
+- Semantic retrieval with sentence transformers  
+- Result filtering by time/location/event type
+- Performance optimization for larger datasets
+- User interface for interactive searching
 
-[TEAM MEMBER 2 TASKS]
-- [ ] Create larger, more diverse query set
-- [ ] Implement additional evaluation metrics if needed
-- [ ] Set up automated evaluation pipeline
-- [ ] Create results visualization
+📋 SPRINT 8 - FINAL DELIVERABLES
+Goal: Prepare final submission and demo.
 
-[BOTH TEAM MEMBERS]
-- [ ] Discuss evaluation results
-- [ ] Plan improvements based on findings
-- [ ] Update project documentation
-- [ ] Prepare Sprint 4 plan
-
-Due: End of Week 3
+Final Deliverables:
+- Complete working IR system
+- Comprehensive evaluation report
+- Final presentation slides
+- Demo video or live demo
+- Clean GitHub repository
+- Project documentation
 
 ================================================================================
-WEEK 4 (SPRINT 4)
-Goal: Implement improvements and advanced features
+                            TECHNICAL SPECIFICATIONS
+================================================================================
 
-TASKS TO DIVIDE:
+Current System Architecture:
+- Data Pipeline: CSV → Documents → Preprocessing → Retrieval
+- Retrieval Models: TF-IDF (scikit-learn) + BM25 (rank-bm25)
+- Preprocessing: Stop words + stemming + vocabulary optimization
+- Evaluation: Standard IR metrics (planned)
 
-[TEAM MEMBER 1 TASKS]
-- [ ] Implement semantic retrieval (optional: sentence transformers)
-- [ ] Add query expansion techniques
-- [ ] Improve document ranking with additional features
-- [ ] Optimize system performance
+File Structure:
+├── data/
+│   ├── raw/                    # Essential CSV files (246MB total)
+│   │   ├── kigali_weather_traffic_ultimate_clean.csv (174MB)
+│   │   └── traffic_simulation.csv (72MB)
+│   ├── processed/              # IR documents (traffic_documents.csv)
+│   ├── interim/               # Intermediate processing
+│   └── queries/               # Test queries and qrels
+├── src/
+│   ├── data/load_data.py      # Data loading and document creation
+│   ├── preprocessing/clean_text.py  # Text preprocessing pipeline
+│   ├── retrieval/tfidf_retrieval.py # TF-IDF retrieval system
+│   ├── retrieval/bm25_retrieval.py   # BM25 retrieval system
+│   └── evaluation/metrics.py  # Evaluation metrics (TODO)
+├── notebooks/
+│   └── 01_build_corpus.ipynb  # Corpus generation notebook
+├── results/                   # Evaluation outputs
+├── README.md                  # Professional project documentation
+├── sprint_plan.txt           # This comprehensive plan
+├── sprint1_data_analysis.md  # Data understanding deliverable
+├── sprint2_document_schema.md # Document format specification
+└── requirements.txt          # Python dependencies
 
-[TEAM MEMBER 2 TASKS]
-- [ ] Create simple demo UI/interface
-- [ ] Add filtering capabilities (by time, location, event type)
-- [ ] Implement result clustering or categorization
-- [ ] Test system with real-world scenarios
-
-[BOTH TEAM MEMBERS]
-- [ ] Test all improvements together
-- [ ] Finalize system architecture
-- [ ] Prepare for final presentation
-- [ ] Document all improvements
-
-Due: End of Week 4
+Dependencies:
+pandas>=1.3.0, scikit-learn>=1.0.0, numpy>=1.21.0, jupyter>=1.0.0, rank-bm25>=0.2.2
 
 ================================================================================
-WEEK 5 (SPRINT 5)
-Goal: Final report, demo preparation, and project completion
-
-TASKS TO DIVIDE:
-
-[TEAM MEMBER 1 TASKS]
-- [ ] Write final report sections (methodology, results, conclusion)
-- [ ] Create presentation slides
-- [ ] Prepare code documentation
-- [ ] Final code review and cleanup
-
-[TEAM MEMBER 2 TASKS]
-- [ ] Finalize demo presentation
-- [ ] Create project video walkthrough (if needed)
-- [ ] Prepare GitHub repository with clean structure
-- [ ] Test final system thoroughly
-
-[BOTH TEAM MEMBERS]
-- [ ] Practice final presentation
-- [ ] Submit all deliverables
-- [ ] Project retrospective and lessons learned
-- [ ] Celebrate completion! 🎉
-
-Due: End of Week 5
-
-================================================================================
-                              COORDINATION NOTES
+                            TEAM COORDINATION
 ================================================================================
 
 Meeting Schedule:
-- Weekly sync: [Day, Time]
-- Mid-week check-in: [Day, Time]
-- Sprint planning/review: [Day, Time]
+- Weekly sync: [Day, Time] - To be decided
+- Mid-week check-in: [Day, Time] - To be decided  
+- Sprint planning/review: [Day, Time] - To be decided
 
 Communication:
-- Primary channel: [Discord/WhatsApp/Slack]
-- File sharing: [Google Drive/GitHub]
-- Code review: [GitHub pull requests]
+- Primary channel: [Discord/WhatsApp/Slack] - To be decided
+- File sharing: GitHub repository
+- Code review: In-person meetings
 
-File Organization:
-- Each person works in separate branch
-- Main integration happens in main branch
-- All code reviewed before merging
+Current Status:
+- Ayomide: Completed all retrieval systems, ready for evaluation
+- Martin: Needs to implement evaluation metrics
+- Project: Ahead of schedule, excellent progress
 
 ================================================================================
-                             CURRENT STATUS (WEEK 2)
+                            PROJECT SUCCESS METRICS
 ================================================================================
 
-What's Working:
-✅ TF-IDF retrieval system functional
-✅ Can search traffic events with queries
-✅ Returns ranked results with scores
-✅ Project structure complete
+Primary Goals:
+✅ Users can type traffic queries and get ranked results
+✅ Two retrieval models implemented (TF-IDF + BM25)
+✅ Clean, documented, reproducible system
+🔄 System performance measured with standard IR metrics
+📋 Clear model comparison and recommendations
 
-Next Immediate Tasks:
-1. Fill in team member names above
-2. Assign Week 2 tasks between team members
-3. Set up coordination meeting schedule
-4. Start working on assigned tasks
+Long-term Vision:
+Support route optimization systems by providing contextual traffic event 
+information for real-time decision making.
 
-Files Created So Far:
-- src/data/load_data.py (data loading and document creation)
-- src/preprocessing/clean_text.py (text preprocessing)
-- src/retrieval/tfidf_retrieval.py (TF-IDF search system)
-- data/processed/traffic_documents.csv (processed IR documents)
+================================================================================
+                            QUICK REFERENCE
+================================================================================
 
-Ready to divide Week 2 tasks!
+Key Files to Reference:
+- src/data/load_data.py - Data loading logic
+- src/preprocessing/clean_text.py - Text preprocessing
+- src/retrieval/tfidf_retrieval.py - TF-IDF implementation
+- src/retrieval/bm25_retrieval.py - BM25 implementation  
+- notebooks/01_build_corpus.ipynb - Corpus generation
+- data/processed/traffic_documents.csv - Final IR corpus
+
+Commands to Run:
+- python3 src/data/load_data.py - Generate corpus
+- python3 src/retrieval/tfidf_retrieval.py - Test TF-IDF
+- python3 src/retrieval/bm25_retrieval.py - Test BM25
+- jupyter notebook notebooks/01_build_corpus.ipynb - Interactive corpus building
+
+Next Immediate Task: Implement evaluation metrics (Martin) + create test queries (Ayomide)

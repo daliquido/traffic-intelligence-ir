@@ -1,3 +1,7 @@
 data/raw/
 data/processed/
-*.csv
+*.pkl
+.DS_Store
+__pycache__/
+*.pyc
+.venv/

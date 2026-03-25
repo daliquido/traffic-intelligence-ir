@@ -8,7 +8,8 @@ import os
 
 # Add parent directory to path to import preprocessing
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from preprocessing.clean_text import clean_text
+from preprocessing.clean_text import clean_text, preprocess_documents
+from preprocessing.query_processor import QueryProcessor
 
 class TFIDFRetriever:
     """
@@ -20,12 +21,14 @@ class TFIDFRetriever:
             max_features=5000,  # Limit vocabulary size
             stop_words='english',
             ngram_range=(1, 2),  # Use unigrams and bigrams
-            min_df=2,  # Ignore terms that appear in less than 2 documents
-            max_df=0.8  # Ignore terms that appear in more than 80% of documents
+            min_df=2,  # Ignore terms in less than 2 documents
+            max_df=0.8,  # Ignore terms in more than 80% of documents
+            lowercase=True
         )
-        self.documents_df = None
         self.tfidf_matrix = None
+        self.documents_df = None
         self.fitted = False
+        self.query_processor = QueryProcessor()  # Add query processor
     
     def fit(self, documents_df: pd.DataFrame, text_column: str = 'searchable_text'):
         """
@@ -45,7 +48,7 @@ class TFIDFRetriever:
         print(f"TF-IDF model fitted with {len(self.vectorizer.vocabulary_)} terms")
         print(f"Document matrix shape: {self.tfidf_matrix.shape}")
     
-    def search(self, query: str, top_k: int = 10) -> List[Tuple[int, str, float]]:
+    def search(self, query: str, top_k: int = 10) -> List[Tuple[str, str, float]]:
         """
         Search for relevant documents given a query.
         
@@ -54,16 +57,17 @@ class TFIDFRetriever:
             top_k (int): Number of top results to return
             
         Returns:
-            List[Tuple[int, str, float]]: List of (doc_id, title, score) tuples
+            List[Tuple[str, str, float]]: List of (doc_id, title, score) tuples
         """
         if not self.fitted:
             raise ValueError("Model must be fitted before searching. Call fit() first.")
         
-        # Clean and preprocess query
-        cleaned_query = clean_text(query)
+        # Preprocess query using the same pipeline as documents
+        query_result = self.query_processor.preprocess_query(query)
+        processed_query = query_result['processed_query']
         
-        # Transform query to TF-IDF vector
-        query_vector = self.vectorizer.transform([cleaned_query])
+        # Transform query to TF-IDF space
+        query_vector = self.vectorizer.transform([processed_query])
         
         # Calculate cosine similarity
         similarities = cosine_similarity(query_vector, self.tfidf_matrix).flatten()
@@ -73,12 +77,11 @@ class TFIDFRetriever:
         
         results = []
         for idx in top_indices:
-            doc_id = self.documents_df.iloc[idx]['doc_id']
-            title = self.documents_df.iloc[idx]['title']
-            score = similarities[idx]
-            
-            # Only include results with non-zero similarity
-            if score > 0:
+            if similarities[idx] > 0:  # Only include results with non-zero similarity
+                doc_id = self.documents_df.iloc[idx]['doc_id']
+                title = self.documents_df.iloc[idx]['title']
+                score = similarities[idx]
+                
                 results.append((doc_id, title, score))
         
         return results
