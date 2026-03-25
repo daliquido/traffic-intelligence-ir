@@ -4,7 +4,7 @@ from typing import List, Dict
 
 class QueryProcessor:
     """
-    Query preprocessing with the same pipeline as documents + synonyms.
+    Query preprocessing with the same pipeline as documents plus synonyms.
     """
     
     def __init__(self):
@@ -205,24 +205,24 @@ class QueryProcessor:
         ]
         
         print("=" * 80)
-        print("🔍 QUERY PREPROCESSING DEMONSTRATION")
+        print("QUERY PREPROCESSING DEMONSTRATION")
         print("=" * 80)
         
         for query in test_queries:
-            print(f"\n📝 Original Query: '{query}'")
+            print(f"\nOriginal Query: '{query}'")
             print("-" * 60)
             
             result = self.preprocess_query(query)
             
-            print(f"🧹 Cleaned: '{result['cleaned']}'")
-            print(f"🔄 With Synonyms: '{result['with_synonyms']}'")
-            print(f"✂️  Stemmed: '{result['stemmed']}'")
-            print(f"🔤 Tokens: {result['tokens']}")
-            print(f"⚡ Final Query: '{result['processed_query']}'")
+            print(f"Cleaned: '{result['cleaned']}'")
+            print(f"With Synonyms: '{result['with_synonyms']}'")
+            print(f"Stemmed: '{result['stemmed']}'")
+            print(f"Tokens: {result['tokens']}")
+            print(f"Final Query: '{result['processed_query']}'")
         
         print(f"\n{'='*80}")
-        print("✅ Query preprocessing pipeline identical to document preprocessing!")
-        print("🎯 This ensures queries and documents use the same token space!")
+        print("Query preprocessing pipeline identical to document preprocessing!")
+        print("This ensures queries and documents use the same token space!")
         print("="*80)
 
 def main():

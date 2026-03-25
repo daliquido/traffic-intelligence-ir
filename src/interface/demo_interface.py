@@ -25,7 +25,7 @@ class DemoSearchInterface:
     
     def initialize(self, sample_size: int = 2000):
         """Initialize retrievers with demo data."""
-        print("🚀 Initializing Traffic Event Search Interface...")
+        print("Initializing Traffic Event Search Interface...")
         print("="*60)
         
         # Load documents
@@ -34,67 +34,67 @@ class DemoSearchInterface:
         
         # Use sample for demo
         sample_df = self.documents_df.sample(n=sample_size, random_state=42)
-        print(f"📊 Loaded {len(sample_df)} traffic events")
+        print(f"Loaded {len(sample_df)} traffic events")
         
         # Preprocess for TF-IDF and BM25
         processed_df = preprocess_documents(sample_df)
         
         # Initialize TF-IDF
-        print("⚙️  Setting up TF-IDF retriever...")
+        print("Setting up TF-IDF retriever...")
         tfidf_retriever = TFIDFRetriever()
         tfidf_retriever.fit(processed_df)
         self.retrievers['TF-IDF'] = tfidf_retriever
         
         # Initialize BM25
-        print("⚙️  Setting up BM25 retriever...")
+        print("Setting up BM25 retriever...")
         bm25_retriever = BM25Retriever()
         bm25_retriever.fit(processed_df)
         self.retrievers['BM25'] = bm25_retriever
         
         # Initialize Enhanced TF-IDF
-        print("⚙️  Setting up Enhanced TF-IDF retriever...")
+        print("Setting up Enhanced TF-IDF retriever...")
         enhanced_retriever = SimpleEnhancedRetriever()
         self.enhanced_documents_df = enhanced_retriever.create_enhanced_documents(sample_df)
         enhanced_retriever.fit(self.enhanced_documents_df)
         self.retrievers['Enhanced TF-IDF'] = enhanced_retriever
         
-        print(f"✅ All {len(self.retrievers)} retrievers ready!")
-        print(f"   Available models: {list(self.retrievers.keys())}")
+        print(f"All {len(self.retrievers)} retrievers ready!")
+        print(f"Available models: {list(self.retrievers.keys())}")
     
     def demo_search(self, query: str, retriever_name: str = 'TF-IDF'):
         """Demonstrate search functionality."""
         print(f"\n{'='*80}")
-        print(f"🔍 {retriever_name} Search Results for: '{query}'")
+        print(f"{retriever_name} Search Results for: '{query}'")
         print(f"{'='*80}")
         
         retriever = self.retrievers[retriever_name]
         results = retriever.search(query, top_k=3)
         
         if not results:
-            print("❌ No relevant documents found.")
+            print("No relevant documents found.")
             return
         
-        print(f"📊 Found {len(results)} relevant traffic events:\n")
+        print(f"Found {len(results)} relevant traffic events:\n")
         
         for i, (doc_id, title, score) in enumerate(results, 1):
             # Get document details
             if 'Enhanced' in retriever_name:
                 doc = self.enhanced_documents_df[self.enhanced_documents_df['doc_id'] == doc_id].iloc[0]
-                print(f"{i}. 📄 [{score:.4f}] {title}")
-                print(f"   🆔 ID: {doc_id}")
-                print(f"   📍 Location: {doc['location']}")
-                print(f"   🌤️  Weather: {doc['event_type']}")
-                print(f"   🚗 Vehicles: {doc['vehicle_count']}")
-                print(f"   🚦 Congestion: {doc['congestion_level']}")
-                print(f"   ⏰ Time: {doc['timestamp']}")
+                print(f"{i}. [{score:.4f}] {title}")
+                print(f"   ID: {doc_id}")
+                print(f"   Location: {doc['location']}")
+                print(f"   Weather: {doc['event_type']}")
+                print(f"   Vehicles: {doc['vehicle_count']}")
+                print(f"   Congestion: {doc['congestion_level']}")
+                print(f"   Time: {doc['timestamp']}")
             else:
                 doc = self.documents_df[self.documents_df['doc_id'] == doc_id].iloc[0]
-                print(f"{i}. 📄 [{score:.4f}] {title}")
-                print(f"   🆔 ID: {doc_id}")
-                print(f"   📍 Location: {doc['location']}")
-                print(f"   🌤️  Weather: {doc['event_type']}")
-                print(f"   🚗 Vehicles: {doc['vehicle_count']}")
-                print(f"   ⏰ Time: {doc['timestamp']}")
+                print(f"{i}. [{score:.4f}] {title}")
+                print(f"   ID: {doc_id}")
+                print(f"   Location: {doc['location']}")
+                print(f"   Weather: {doc['event_type']}")
+                print(f"   Vehicles: {doc['vehicle_count']}")
+                print(f"   Time: {doc['timestamp']}")
             print()
     
     def demo_comparison(self, query: str):

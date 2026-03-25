@@ -18,17 +18,17 @@ class TFIDFRetriever:
     
     def __init__(self):
         self.vectorizer = TfidfVectorizer(
-            max_features=5000,  # Limit vocabulary size
+            max_features=5000,
             stop_words='english',
-            ngram_range=(1, 2),  # Use unigrams and bigrams
-            min_df=2,  # Ignore terms in less than 2 documents
-            max_df=0.8,  # Ignore terms in more than 80% of documents
+            ngram_range=(1, 2),
+            min_df=2,
+            max_df=0.8,
             lowercase=True
         )
         self.tfidf_matrix = None
         self.documents_df = None
         self.fitted = False
-        self.query_processor = QueryProcessor()  # Add query processor
+        self.query_processor = QueryProcessor()
     
     def fit(self, documents_df: pd.DataFrame, text_column: str = 'searchable_text'):
         """
@@ -36,7 +36,7 @@ class TFIDFRetriever:
         
         Args:
             documents_df (pd.DataFrame): DataFrame with text column
-            text_column (str): Column name to use for TF-IDF (default: 'searchable_text')
+            text_column (str): Column name to use for TF-IDF
         """
         print("Fitting TF-IDF model...")
         self.documents_df = documents_df.copy()
@@ -77,7 +77,7 @@ class TFIDFRetriever:
         
         results = []
         for idx in top_indices:
-            if similarities[idx] > 0:  # Only include results with non-zero similarity
+            if similarities[idx] > 0:
                 doc_id = self.documents_df.iloc[idx]['doc_id']
                 title = self.documents_df.iloc[idx]['title']
                 score = similarities[idx]
