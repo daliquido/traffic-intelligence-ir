@@ -95,26 +95,30 @@ def create_traffic_documents(df):
         else:
             congestion_level = "free flow"
         
-        # Create document text (searchable content)
-        doc_text = f"Traffic event: {congestion_level} on {highway_type} road"
-        
-        # Add weather context
-        if weather_condition.lower() != 'unknown':
-            doc_text += f" during {weather_condition.lower()} weather conditions"
-        
-        # Add temporal context
+        # Create document text with more unique details
+        vehicle_count = row.get('vehicle_counts', 0)
+        temperature = row.get('temperature', 0)
+        precipitation = row.get('precipitation', 0)
+        highway_type = row.get('highway_type', 'road')
+        is_rush_hour = row.get('is_rush_hour', False)
+        is_weekend = row.get('is_weekend', False)
+
+        doc_text = (
+            f"{congestion_level} traffic on {highway_type} road. "
+            f"Weather: {weather_condition}. "
+            f"Vehicle count: {vehicle_count}. "
+            f"Temperature: {temperature:.1f} degrees. "
+            f"Precipitation: {precipitation:.2f}mm. "
+        )
+
         if is_rush_hour:
-            doc_text += " during rush hour"
+            doc_text += "Rush hour period. "
         if is_weekend:
-            doc_text += " on weekend"
-        
-        # Add severity details
-        if precipitation > 0:
-            doc_text += f" with {precipitation:.2f}mm precipitation"
-        if temperature > 30:
-            doc_text += " during hot conditions"
-        elif temperature < 15:
-            doc_text += " during cold conditions"
+            doc_text += "Weekend day. "
+        if vehicle_count > 500:
+            doc_text += "Severe congestion alert. High vehicle density. "
+        elif vehicle_count > 200:
+            doc_text += "Moderate delays expected. "
         
         # Create document record
         doc = {

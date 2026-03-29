@@ -50,10 +50,10 @@ def get_traffic_stop_words() -> set:
     
     # Traffic-specific stop words (common but not useful for search)
     traffic_stopwords = {
-        'event', 'events', 'traffic', 'road', 'roads', 'during', 'with', 'conditions',
-        'weather', 'condition', 'reported', 'detected', 'observed', 'recorded',
-        'document', 'text', 'preview', 'mm', 'precipitation', 'temperature',
-        'hour', 'hours', 'day', 'days', 'week', 'time', 'period', 'data', 'file'
+        'event', 'events', 'reported', 'detected', 'observed',
+        'recorded', 'document', 'text', 'preview', 'file', 'data'
+        # Removed: 'traffic', 'road', 'weather', 'conditions', 'during', 'with'
+        # These are core search terms in your documents - never remove them
     }
     
     # Combine both sets
@@ -67,25 +67,26 @@ def get_traffic_stop_words() -> set:
 
 def simple_stem(token: str) -> str:
     """
-    Simple stemming function (basic suffix removal).
-    More sophisticated than nothing, lighter than full Porter stemmer.
+    Conservative stemming - only remove endings when safe.
     """
-    if len(token) <= 3:
-        return token
-    
-    # Common suffixes to remove
-    suffixes = ['ing', 'ed', 'er', 'est', 'ly', 'tion', 'sion', 'ness', 'ment', 'able', 'ible']
-    
-    for suffix in suffixes:
-        if token.endswith(suffix) and len(token) > len(suffix) + 2:
-            token = token[:-len(suffix)]
-            break
-    
-    # Remove trailing 'e' if it makes the word too short
-    if token.endswith('e') and len(token) > 4:
-        token = token[:-1]
-    
-    return token
+    if len(token) <= 4:
+        return token  # Don't touch short words at all
+
+    # Only remove these specific endings, and only when word is long enough
+    # Order matters - check longer suffixes first
+    safe_suffixes = [
+        ('tion', 4),    # congestion -> congest (min 4 chars left)
+        ('ing', 4),     # flowing -> flow
+        ('ed', 4),      # blocked -> block
+        ('ly', 4),      # heavily -> heavi
+        ('es', 4),      # crashes -> crash
+    ]
+
+    for suffix, min_remaining in safe_suffixes:
+        if token.endswith(suffix) and len(token) - len(suffix) >= min_remaining:
+            return token[:-len(suffix)]
+
+    return token  # Return unchanged if no safe suffix found
 
 def tokenize(text: str) -> List[str]:
     """
@@ -108,19 +109,12 @@ def tokenize(text: str) -> List[str]:
     # Process tokens
     processed_tokens = []
     for token in tokens:
-        # Remove stop words
         if token.lower() in stop_words:
             continue
-            
-        # Remove very short tokens
         if len(token) < 2:
             continue
-            
-        # Apply simple stemming
-        stemmed_token = simple_stem(token)
-        
-        # Keep the stemmed token
-        processed_tokens.append(stemmed_token)
+        # No stemming - just append the token directly
+        processed_tokens.append(token)
     
     return processed_tokens
 

@@ -18,12 +18,13 @@ class TFIDFRetriever:
     
     def __init__(self):
         self.vectorizer = TfidfVectorizer(
-            max_features=5000,
-            stop_words='english',
+            max_features=10000,    # was 5000 - more vocabulary coverage
+            stop_words=None,       # we handle stop words ourselves now
             ngram_range=(1, 2),
-            min_df=2,
-            max_df=0.8,
-            lowercase=True
+            min_df=1,              # was 2 - don't exclude rare but relevant terms
+            max_df=0.95,           # was 0.8 - less aggressive filtering
+            lowercase=True,
+            sublinear_tf=True      # dampens very frequent terms, helps ranking
         )
         self.tfidf_matrix = None
         self.documents_df = None

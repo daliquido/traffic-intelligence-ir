@@ -41,47 +41,18 @@ class QueryProcessor:
             "wind": "weather"
         }
         
-        # Custom stop words (same as document preprocessing)
+        # Custom stop words (same as document preprocessing, but keeping important traffic terms)
         self.stop_words = {
+            # Basic English function words only
             'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from',
-            'has', 'he', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the',
-            'to', 'was', 'will', 'with', 'the', 'this', 'but', 'they', 'have',
-            'had', 'what', 'said', 'each', 'which', 'their', 'time', 'if',
-            'up', 'out', 'many', 'then', 'them', 'can', 'would', 'there',
-            'all', 'so', 'also', 'her', 'much', 'more', 'very', 'when',
-            'make', 'like', 'back', 'after', 'use', 'two', 'how', 'our',
-            'work', 'first', 'well', 'way', 'even', 'new', 'want', 'because',
-            'any', 'these', 'give', 'day', 'most', 'us', 'is', 'was', 'are',
-            'been', 'has', 'had', 'were', 'said', 'did', 'getting', 'made',
-            'find', 'where', 'too', 'only', 'come', 'his', 'your', 'now',
-            'than', 'call', 'who', 'oil', 'sit', 'now', 'find', 'long',
-            'down', 'day', 'did', 'get', 'has', 'him', 'his', 'how', 'man',
-            'new', 'now', 'old', 'see', 'two', 'way', 'who', 'boy', 'did',
-            'number', 'no', 'part', 'people', 'my', 'over', 'know', 'water',
-            'than', 'call', 'first', 'who', 'may', 'down', 'side', 'been',
-            'now', 'find', 'head', 'stand', 'own', 'page', 'should', 'country',
-            'found', 'answer', 'school', 'grow', 'study', 'still', 'learn',
-            'plant', 'cover', 'food', 'sun', 'four', 'between', 'state',
-            'keep', 'eye', 'never', 'last', 'let', 'thought', 'city', 'tree',
-            'cross', 'farm', 'hard', 'start', 'might', 'story', 'saw', 'far',
-            'sea', 'draw', 'left', 'late', 'run', 'dont', 'while', 'press',
-            'close', 'night', 'real', 'life', 'few', 'north', 'open', 'seem',
-            'together', 'next', 'white', 'children', 'begin', 'got', 'walk',
-            'example', 'ease', 'paper', 'group', 'always', 'music', 'those',
-            'both', 'mark', 'often', 'letter', 'until', 'mile', 'river',
-            'car', 'feet', 'care', 'second', 'book', 'carry', 'took', 'science',
-            'eat', 'room', 'friend', 'began', 'idea', 'fish', 'mountain',
-            'stop', 'once', 'base', 'hear', 'horse', 'cut', 'sure', 'watch',
-            'color', 'face', 'wood', 'main', 'open', 'seem', 'together',
-            'next', 'white', 'children', 'begin', 'got', 'walk', 'example',
-            'ease', 'paper', 'group', 'always', 'music', 'those', 'both',
-            'mark', 'often', 'letter', 'until', 'mile', 'river', 'car',
-            'feet', 'care', 'second', 'book', 'carry', 'took', 'science',
-            'eat', 'room', 'friend', 'began', 'idea', 'fish', 'mountain',
-            'stop', 'once', 'base', 'hear', 'horse', 'cut', 'sure', 'watch',
-            'color', 'face', 'wood', 'main', 'traffic', 'event', 'events',
-            'during', 'with', 'conditions', 'condition', 'reported', 'detected',
-            'observed', 'recorded', 'noted', 'occurred', 'happened'
+            'has', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the',
+            'to', 'was', 'will', 'with', 'this', 'but', 'they', 'have',
+            'had', 'which', 'their', 'if', 'can', 'would', 'there',
+            'all', 'so', 'also', 'than', 'then', 'them', 'or', 'not',
+            'been', 'were', 'did', 'does', 'do', 'its', 'our',
+            # Traffic noise words that add no search value
+            'event', 'events', 'reported', 'detected', 'observed',
+            'recorded', 'noted', 'occurred', 'happened'
         }
     
     def clean_text(self, text: str) -> str:
@@ -146,50 +117,29 @@ class QueryProcessor:
         cleaned = self.clean_text(text)
         with_synonyms = self.apply_synonyms(cleaned)
         
-        # Apply stemming
-        stemmed = self.simple_stem(with_synonyms)
-        
         # Split into tokens
-        tokens = stemmed.split()
+        tokens = with_synonyms.split()
         
-        # Remove stop words
-        filtered_tokens = [token for token in tokens if token not in self.stop_words and len(token) > 1]
+        # Remove stop words only - NO stemming
+        filtered_tokens = [
+            token for token in tokens 
+            if token not in self.stop_words 
+            and len(token) > 1
+        ]
         
         return filtered_tokens
     
     def preprocess_query(self, query: str) -> Dict[str, any]:
-        """
-        Full query preprocessing pipeline.
-        
-        Args:
-            query (str): Original query string
-            
-        Returns:
-            Dict: Preprocessing results
-        """
-        # Original query
         original = query
-        
-        # Cleaned query
         cleaned = self.clean_text(query)
-        
-        # With synonyms
         with_synonyms = self.apply_synonyms(cleaned)
-        
-        # Stemmed
-        stemmed = self.simple_stem(with_synonyms)
-        
-        # Tokenized
         tokens = self.tokenize(query)
-        
-        # Reconstructed query for search
         processed_query = ' '.join(tokens)
         
         return {
             'original': original,
             'cleaned': cleaned,
             'with_synonyms': with_synonyms,
-            'stemmed': stemmed,
             'tokens': tokens,
             'processed_query': processed_query
         }

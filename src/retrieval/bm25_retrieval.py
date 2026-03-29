@@ -15,7 +15,7 @@ class BM25Retriever:
     BM25 based Information Retrieval system for traffic events.
     """
     
-    def __init__(self, k1: float = 1.2, b: float = 0.75):
+    def __init__(self, k1: float = 1.5, b: float = 0.75):
         """
         Initialize BM25 retriever.
         

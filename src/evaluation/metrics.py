@@ -278,8 +278,24 @@ def main():
     print("Loading documents and evaluation data...")
     documents_df = pd.read_csv(documents_path)
     
-    # Use sample for faster evaluation
-    sample_df = documents_df.sample(n=10000, random_state=42)
+    # Load qrels to know which documents must be included
+    qrels_df = pd.read_csv(qrels_path)
+
+    # Always include qrel documents in the sample
+    qrel_doc_ids = set(qrels_df['doc_id'].unique())
+    qrel_docs = documents_df[documents_df['doc_id'].isin(qrel_doc_ids)]
+
+    # Fill the rest with random documents
+    remaining_size = 10000 - len(qrel_docs)
+    other_docs = documents_df[~documents_df['doc_id'].isin(qrel_doc_ids)]
+    random_docs = other_docs.sample(n=remaining_size, random_state=42)
+
+    # Combine and shuffle
+    sample_df = pd.concat([qrel_docs, random_docs], ignore_index=True)
+    sample_df = sample_df.sample(frac=1, random_state=42).reset_index(drop=True)
+
+    print(f"Sample includes {len(qrel_docs)} qrel documents + {len(random_docs)} random documents")
+
     processed_df = preprocess_documents(sample_df)
     
     # Initialize evaluator
