@@ -7,14 +7,6 @@ q1,traffic_278802,2
 q1,traffic_253229,1
 q1,traffic_432656,1
 q1,traffic_39078,1
-q2,traffic_16,2
-q2,traffic_17,2
-q2,traffic_18,2
-q2,traffic_40,2
-q2,traffic_41,2
-q2,traffic_42,1
-q2,traffic_64,1
-q2,traffic_65,1
 q3,traffic_82726,2
 q3,traffic_339430,2
 q3,traffic_341758,2
@@ -30,3 +22,11 @@ q5,traffic_256006,2
 q5,traffic_352270,2
 q5,traffic_495406,2
 q5,traffic_448030,2
+q2,traffic_16,2
+q2,traffic_17,2
+q2,traffic_18,2
+q2,traffic_40,2
+q2,traffic_41,2
+q2,traffic_42,1
+q2,traffic_64,1
+q2,traffic_65,1

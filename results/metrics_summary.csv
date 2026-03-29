@@ -74,12 +74,12 @@ q24,highway closure effects,TF-IDF,AP,0.0,0.0,0.0
 q25,early morning traffic,TF-IDF,5,0.0,0.0,0.0
 q25,early morning traffic,TF-IDF,10,0.0,0.0,0.0
 q25,early morning traffic,TF-IDF,AP,0.0,0.0,0.0
-q1,heavy rain traffic congestion,BM25,5,0.0,0.0,0.0
-q1,heavy rain traffic congestion,BM25,10,0.0,0.0,0.0
-q1,heavy rain traffic congestion,BM25,AP,0.0,0.0,0.0
-q2,road congestion during rush hour,BM25,5,0.2,0.125,0.14606834984270645
-q2,road congestion during rush hour,BM25,10,0.1,0.125,0.1311654284411629
-q2,road congestion during rush hour,BM25,AP,0.03125,0.03125,0.03125
+q1,heavy rain traffic congestion,BM25,5,0.4,0.25,0.3451913422468693
+q1,heavy rain traffic congestion,BM25,10,0.2,0.25,0.3099724912942974
+q1,heavy rain traffic congestion,BM25,AP,0.1125,0.1125,0.1125
+q2,road congestion during rush hour,BM25,5,0.0,0.0,0.0
+q2,road congestion during rush hour,BM25,10,0.0,0.0,0.0
+q2,road congestion during rush hour,BM25,AP,0.0,0.0,0.0
 q3,accidents near downtown,BM25,5,0.0,0.0,0.0
 q3,accidents near downtown,BM25,10,0.0,0.0,0.0
 q3,accidents near downtown,BM25,AP,0.0,0.0,0.0
